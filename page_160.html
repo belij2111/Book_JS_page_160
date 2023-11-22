@@ -12,16 +12,10 @@
 
     <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
     <script>
-
-        let leftOffset = 0;
-        let moveHeading = function () {
-            $("#main-heading").offset({ top: leftOffset });
-            leftOffset++;
-            if (leftOffset > 200) {
-                leftOffset = 0;
-            }
+        let clickHandler = function (event) {
+            console.log("Клик!" + event.pageX + " " + event.pageY);
         };
-        setInterval(moveHeading,30);
+        $("h1").click(clickHandler);
     </script>
 
 </body>
