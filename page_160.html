@@ -14,14 +14,38 @@
     <script>
 
         let leftOffset = 0;
-        let moveHeading = function () {
-            $("#main-heading").offset({ top: leftOffset });
-            leftOffset++;
-            if (leftOffset > 200) {
+        let topOffset = 0;
+        let currentDirection = "right";
+
+        var moveHeading = function (pixels) {
+            $("#main-heading").offset({ left: leftOffset, top: topOffset })
+            if (currentDirection === "right")
+                leftOffset++;
+            else
+                leftOffset--;
+            if (leftOffset < 0 && topOffset > 0) {
                 leftOffset = 0;
+                topOffset--;
+            } else if (topOffset === 0) {
+                currentDirection = "right";
+            }
+            if (leftOffset > pixels) {
+                leftOffset = pixels;
+
+                topOffset++;
+                if (topOffset > pixels) {
+                    topOffset = pixels;
+                    currentDirection = "left";
+                }
+                else if (topOffset < 0) {
+                    topOffset = 0;
+                }
             }
         };
-        setInterval(moveHeading,30);
+
+
+        setInterval(moveHeading, 10, 200)
+
     </script>
 
 </body>
