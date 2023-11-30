@@ -44,7 +44,13 @@
         };
 
 
-        setInterval(moveHeading, 10, 200)
+        let animation = setInterval(moveHeading, 10, 200);
+        let stop = function () {
+            clearInterval(animation);
+        }
+        $("#main-heading").click(stop);
+
+
 
     </script>
 
