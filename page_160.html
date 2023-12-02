@@ -12,12 +12,14 @@
 
     <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
     <script>
-
+        let counter = 5;
         let leftOffset = 0;
         let topOffset = 0;
         let currentDirection = "right";
+        let interval = 30;
+        let perimeter = 400;
 
-        var moveHeading = function (pixels) {
+        let moveHeading = function (pixels) {
             $("#main-heading").offset({ left: leftOffset, top: topOffset })
             if (currentDirection === "right")
                 leftOffset++;
@@ -42,15 +44,19 @@
                 }
             }
         };
-
-
-        let animation = setInterval(moveHeading, 10, 200);
-        let stop = function () {
-            clearInterval(animation);
+        let movementPerimeter = setInterval(moveHeading, interval, perimeter);
+        let accelerator = function () {
+            if (counter > 0) {
+                document.getElementById("main-heading").innerHTML = counter--;
+                clearInterval(movementPerimeter);
+                interval -= 5;
+                movementPerimeter = setInterval(moveHeading, interval, perimeter);
+            } else {
+                document.getElementById("main-heading").innerHTML = "You won!!!";
+                clearInterval(movementPerimeter);
+            }
         }
-        $("#main-heading").click(stop);
-
-
+        $("#main-heading").click(accelerator);
 
     </script>
 
